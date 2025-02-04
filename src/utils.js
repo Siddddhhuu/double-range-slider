@@ -4,11 +4,24 @@ export const formatTime = (minutes) => {
   return `${hours.toString().padStart(2, "0")}:${mins.toString().padStart(2, "0")}`;
 };
 
-
-export const getBackgroundGradient = ([start, end]) => {
-  return `linear-gradient(to right, 
-    #002F6C ${start / 14.4}%, 
-    #FFCF81 ${(end - start) / 14.4}%, 
-  rgb(32, 37, 44) 100%)`;
+// Giving background gradient based on time
+export const getBackgroundGradient = ([start]) => {
+  if (start < 360) {
+    return "linear-gradient(to right, #001F3F, #191970)"; // Night
+  } else if (start >= 360 && start < 600) {
+    return "linear-gradient(to right, #FFA500, #FFD700)"; // Sunrise
+  } else if (start >= 600 && start < 1080) {
+    return "linear-gradient(to right, #87CEEB, #FFD700)"; // Day  
+  } else {
+    return "linear-gradient(to right, #191970, #001F3F)"; // Night
+  }
 };
 
+// Giving Sun/Moon position based on time
+export const getSunMoonPosition = (time) => {
+  const percent = (time / 1439) * 100;
+  return {
+    left: `${percent}%`,
+    bottom: time >= 360 && time <= 1080 ? `${(time - 360) / 7}px` : "10px",
+  };
+};
