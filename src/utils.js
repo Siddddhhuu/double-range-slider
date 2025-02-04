@@ -9,5 +9,6 @@ export const getBackgroundGradient = ([start, end]) => {
   return `linear-gradient(to right, 
     #002F6C ${start / 14.4}%, 
     #FFCF81 ${(end - start) / 14.4}%, 
-    #002F6C 100%)`;
+  rgb(32, 37, 44) 100%)`;
 };
+
